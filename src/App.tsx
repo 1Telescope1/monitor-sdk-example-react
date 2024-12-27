@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 // 使用 React.lazy 进行懒加载
 const Behaviour = React.lazy(() => import('./pages/Behaviour'));

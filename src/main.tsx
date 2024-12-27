@@ -4,7 +4,7 @@ import App from './App.tsx'
 import monitorSDK from 'monitor-sdk'
 
 monitorSDK.init()
-// monitorSDK.Performance()
+monitorSDK.Performance()
 monitorSDK.Behavior()
 createRoot(document.getElementById('root')!).render(
   <App />
