@@ -1,0 +1,34 @@
+.header {
+  color: red;
+}
+.method {
+  color: #606266;
+}
+.tableHeader {
+  display: flex;
+  text-align: center;
+  border-bottom: 1px solid #006df8;
+  .index {
+    width: 10%;
+  }
+  .type {
+    width: 40%;
+  }
+  .subType {
+    width: 40%;
+  }
+}
+.table {
+  display: flex;
+  text-align: center;
+  color: #0984e3;
+  .index {
+    width: 10%;
+  }
+  .type {
+    width: 40%;
+  }
+  .subType {
+    width: 40%;
+  }
+}

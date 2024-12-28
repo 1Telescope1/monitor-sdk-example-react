@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
 import {
   MenuFoldOutlined,
-  MenuUnfoldOutlined,
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
@@ -55,28 +54,28 @@ const App: React.FC = () => {
             ]}
           />
         </Sider>
-        <Layout>
-          <Content
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              minHeight: 280,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            <Suspense fallback={<div>Loading...</div>}>
-              <Routes>
-                {/* 使用 Navigate 组件进行重定向 */}
-                <Route path="/" element={<Navigate to="/performance" replace />} />
-                <Route path="/performance" element={<Performance />} />
-                <Route path="/Error" element={<Error />} />
-                <Route path="/Exception" element={<Exception />} />
-                <Route path="/Behaviour" element={<Behaviour />} />
-              </Routes>
-            </Suspense>
-          </Content>
-        </Layout>
+        <Content
+          style={{
+            height: 'calc(100vh - 48px)',
+            overflowY: 'auto',
+            margin: '24px 16px',
+            padding: 24,
+            minHeight: 280,
+            background: colorBgContainer,
+            borderRadius: borderRadiusLG,
+          }}
+        >
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              {/* 使用 Navigate 组件进行重定向 */}
+              <Route path="/" element={<Navigate to="/performance" replace />} />
+              <Route path="/performance" element={<Performance />} />
+              <Route path="/Error" element={<Error />} />
+              <Route path="/Exception" element={<Exception />} />
+              <Route path="/Behaviour" element={<Behaviour />} />
+            </Routes>
+          </Suspense>
+        </Content>
       </Layout>
     </Router>
   );

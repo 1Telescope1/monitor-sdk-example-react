@@ -6,10 +6,6 @@ import Load from './components/load';
 import Ajax from './components/ajax';
 
 function Performance() {
-  const onChange = (key: string) => {
-    console.log(key);
-  };
-
   const items: TabsProps['items'] = [
     {
       key: '1',
@@ -29,7 +25,7 @@ function Performance() {
   ];
   return (
     <div>
-      <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+      <Tabs defaultActiveKey="1" items={items}/>
     </div>
   )
 }
