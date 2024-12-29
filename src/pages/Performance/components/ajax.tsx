@@ -54,13 +54,19 @@ function Ajax() {
       title: '请求开始时间',
       dataIndex: 'startTime',
       key: 'startTime',
-      width: '100px',
+      width: '120px',
+      render: (text) => {
+        return new Date(text).toLocaleString()
+      }
     },
     {
       title: '请求结束时间',
       dataIndex: 'endTime',
       key: 'endTime',
-      width: '100px',
+      width: '120px',
+      render: (text) => {
+        return new Date(text).toLocaleString()
+      }
     },
     {
       title: '请求持续时间',
@@ -165,6 +171,12 @@ function Ajax() {
     }
   }
 
+  const batchAjax = () => {
+    for (let i = 0; i < 30; i++) {
+      axiosApi('get', true)
+    }
+  }
+
   return (
     <div>
       <Alert message={message} type="success" />
@@ -182,6 +194,11 @@ function Ajax() {
           <Button type="primary" onClick={() => fetchApi('post', true)}>正确fetch的post请求</Button>
           <Button type="primary" danger onClick={() => fetchApi('get', false)}>异常fetch的get请求</Button>
           <Button type="primary" danger onClick={() => fetchApi('post', false)}>异常fetch的post请求</Button>
+        </Space>
+      </div>
+      <div style={{ marginTop: '10px' }}>
+        <Space>
+          <Button type="primary" onClick={batchAjax}>快速发送30个请求</Button>
         </Space>
       </div>
       <div style={{ marginTop: '10px' }}>

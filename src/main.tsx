@@ -12,8 +12,15 @@ window.monitor = {}
 // @ts-ignore
 window.monitor.config = config
 monitorSDK.init(config)
-monitorSDK.Performance()
 // monitorSDK.Behavior()
+// monitorSDK.Performance()
+monitorSDK.Error.initErrorEventListener()
+monitorSDK.Behavior()
+const ErrorBoundary = monitorSDK.Error.ErrorBoundary
+function ErrorFallback({ error }: { error: any }) {
+  console.log(error);
+  return <div>发生错误: {error.message},请稍后重试。</div>;
+}
 
 axios.defaults.baseURL = 'http://127.0.0.1:3000';
 axios.interceptors.response.use(
@@ -26,14 +33,16 @@ axios.interceptors.response.use(
   }
 );
 
+
+const webUrl = "http://localhost:5173"
+
 // 监听 fetch 请求
 const originalFetch = window.fetch;
 window.fetch = async (...args) => {
   const response = await originalFetch(...args);
-  console.log('Fetch Request:', args[0]);
-  console.log('Fetch Response:', response);
   return response;
 };
+
 
 // 监听 XMLHttpRequest 请求
 const originalXHR = window.XMLHttpRequest;
@@ -42,7 +51,8 @@ window.XMLHttpRequest = function () {
   const xhr = new originalXHR();
   xhr.addEventListener('load', () => {
     const url = xhr.responseURL
-    const response = JSON.parse(xhr.response)    
+    if (url.includes(webUrl)) return
+    const response = JSON.parse(xhr.response)
     if (url === config.url) {
       notification.open({
         message: '批量发送了数据到服务端',
@@ -54,5 +64,9 @@ window.XMLHttpRequest = function () {
 };
 
 createRoot(document.getElementById('root')!).render(
-  <App />
+  // @ts-ignore
+  <ErrorBoundary Fallback={ErrorFallback}>
+    <App />
+  </ErrorBoundary>
+  // <App />
 )

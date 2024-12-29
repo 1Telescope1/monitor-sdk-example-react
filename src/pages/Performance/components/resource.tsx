@@ -16,6 +16,15 @@ function Resource() {
       ellipsis: true,
       tooltip: true,
     },
+     {
+      title: '时间',
+      dataIndex: 'timestamp',
+      key: 'timestamp',
+      width: '120px',
+      render: (text) => {
+        return new Date(text).toLocaleString()
+      }
+    },
     {
       title: '资源类型',
       dataIndex: 'sourceType',

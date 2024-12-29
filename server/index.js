@@ -13,6 +13,9 @@ const resourceList = []
 const loadList = []
 const ajaxList = []
 
+const normalErrList = []
+const resourceErrList = []
+
 app.get('/api/hello', (req, res) => {
   res.json({ message: '请求成功' });
 });
@@ -27,6 +30,12 @@ app.post('/api/data', (req, res) => {
         ajaxList.unshift(d)
       } else {
         loadList.unshift(d)
+      }
+    } else if (d.type === 'error') {
+      if (d.subType === 'resource') {
+        resourceErrList.unshift(d)
+      } else {
+        normalErrList.unshift(d)
       }
     }
   })
@@ -43,6 +52,14 @@ app.get('/api/load', (req, res) => {
 
 app.get('/api/ajax', (req, res) => {
   res.json({ data: ajaxList });
+});
+
+app.get('/api/normalError', (req, res) => {
+  res.json({ data: normalErrList });
+});
+
+app.get('/api/resourceError', (req, res) => {
+  res.json({ data: resourceErrList });
 });
 
 app.get('/api/get', (req, res) => {

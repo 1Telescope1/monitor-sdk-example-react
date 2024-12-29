@@ -32,3 +32,27 @@
     width: 40%;
   }
 }
+.codeDisplay {
+  font-family: monospace;
+  white-space: pre-wrap;
+  line-height: 0.7; /* 设置行高，减少行间距 */
+}
+
+.lineNumber {
+  color: gray;
+  margin-right: 8px;
+}
+
+.highlightedLine {
+  background-color: #fce4e4; /* 错误行背景色 */
+  margin-bottom: 2px; /* 控制行之间的间隔 */
+}
+
+.errorHighlight {
+  background-color: yellow; /* 错误字符背景色 */
+  font-weight: bold;
+}
+.modal {
+  width: 1200px;
+  height: 700px;
+}
