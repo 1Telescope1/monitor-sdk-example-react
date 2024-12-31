@@ -4,7 +4,7 @@ import { config } from '../config/index.ts'
 
 // @ts-ignore
 function Dscription(props: { data: any }) {
-  const data = Object.values(props.data)
+  const data = Object.values(props.data)  
 
   let trackerMethod = 'AJAX'
   if (config.isImageUpload) {

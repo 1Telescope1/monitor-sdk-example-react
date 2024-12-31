@@ -1,9 +1,9 @@
 import { Alert, Button, Space, Table } from 'antd';
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ErrorHighlighter from '../../../components/ErrorHighlighter';
-import { record } from "rrweb";
 import ReplayComponent from '../../../components/ReplayComponent';
+import monitorSDK from 'monitor-sdk'
 
 function NormalError() {
   const message = "js错误通过监听error事件拦截，promise错误通过监听unhandledrejection事件拦截"
@@ -96,33 +96,20 @@ function NormalError() {
       render: (text, record) => {
         return (
           <Space>
-            <Button type='primary'>播放</Button>
+            <Button type='primary' onClick={() => replay(record)}>播放错误录屏</Button>
           </Space>
         )
       }
     }
   ]
 
-  const [events, setEvents] = useState([]); // 存储录制的事件
-  const recorderRef = useRef(null);
-  const startRecord = () => {
-    recorderRef.current = record({
-      emit: (event) => {
-        console.log(event, 'event');
-        setEvents((prev) => [...prev, event]);
-      },
-    });
-  }
-
-  const replay = () => {
+  const [events, setEvents] = useState<any>(); // 存储录制的事件
+  const replay = (record) => {
+    const { eventData } = record
+    const evnents = monitorSDK.unzipRecordscreen(eventData)
+    setEvents(evnents)
     setIsModalOpen(true)
-  };
 
-  const stopRecord = () => {
-    if (recorderRef.current) {
-      recorderRef.current();
-      console.log("Recording stopped. Events:", events);
-    }
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -139,13 +126,6 @@ function NormalError() {
           <Button type='primary' danger onClick={jsError}>Js-错误</Button>
           <Button type='primary' danger onClick={promiseError}>Promise-错误</Button>
           <Button type='primary' danger onClick={reactError}>react框架-错误</Button>
-        </Space>
-      </div>
-      <div style={{ marginTop: '10px' }}>
-        <Space>
-          <Button type='primary' onClick={startRecord}>开启错误录屏</Button>
-          <Button type='primary' onClick={stopRecord}>关闭错误录屏</Button>
-          <Button type='primary' onClick={replay}>播放</Button>
         </Space>
       </div>
       <div style={{ marginTop: '10px' }}>

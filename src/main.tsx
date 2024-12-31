@@ -16,6 +16,7 @@ monitorSDK.init(config)
 // monitorSDK.Performance()
 monitorSDK.Error.initErrorEventListener()
 monitorSDK.Behavior()
+monitorSDK.Exception()
 const ErrorBoundary = monitorSDK.Error.ErrorBoundary
 function ErrorFallback({ error }: { error: any }) {
   console.log(error);
@@ -51,8 +52,9 @@ window.XMLHttpRequest = function () {
   const xhr = new originalXHR();
   xhr.addEventListener('load', () => {
     const url = xhr.responseURL
-    if (url.includes(webUrl)) return
+    if (url.includes(webUrl)) return    
     const response = JSON.parse(xhr.response)
+    
     if (url === config.url) {
       notification.open({
         message: '批量发送了数据到服务端',

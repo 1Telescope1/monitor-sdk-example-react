@@ -7,7 +7,8 @@ const app = express();
 // 使用 CORS 中间件，允许所cors
 app.use(cors());
 
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 const resourceList = []
 const loadList = []
@@ -15,6 +16,11 @@ const ajaxList = []
 
 const normalErrList = []
 const resourceErrList = []
+
+const exceptionList = []
+const whiteScreenList = []
+const stutterList = []
+const crashList = []
 
 app.get('/api/hello', (req, res) => {
   res.json({ message: '请求成功' });
@@ -36,6 +42,15 @@ app.post('/api/data', (req, res) => {
         resourceErrList.unshift(d)
       } else {
         normalErrList.unshift(d)
+      }
+    } else if (d.type === 'exception') {
+      exceptionList.unshift(d)
+      if (d.subType === 'whiteScreen') {
+        whiteScreenList.unshift(d)
+      } else if (d.subType === 'stutter') {
+        stutterList.unshift(d)
+      } else if (d.subType ==='crash'){
+        crashList.unshift(d)
       }
     }
   })
@@ -61,6 +76,22 @@ app.get('/api/normalError', (req, res) => {
 app.get('/api/resourceError', (req, res) => {
   res.json({ data: resourceErrList });
 });
+
+app.get('/api/exception', (req, res) => {
+  res.json({ data: exceptionList });
+})
+
+app.get('/api/whiteScreen', (req, res) => {
+  res.json({ data: whiteScreenList });
+});
+
+app.get('/api/stutter', (req, res) => {
+  res.json({ data: stutterList });
+});
+
+app.get('/api/crash', (req, res) => {
+  res.json({ data: crashList });
+})
 
 app.get('/api/get', (req, res) => {
   res.json({ data: 'get成功' });
