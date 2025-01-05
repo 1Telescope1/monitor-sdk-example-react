@@ -1,11 +1,16 @@
 import express from 'express';
-import cors from 'cors'
+import coBody from 'co-body'
 
 // 创建一个 Express 应用
 const app = express();
 
-// 使用 CORS 中间件，允许所cors
-app.use(cors());
+app.all('*', function(res, req, next) {
+  req.header('Access-Control-Allow-Origin', '*')
+  req.header('Access-Control-Allow-Headers', 'Content-Type')
+  req.header('Access-Control-Allow-Methods', '*')
+  req.header('Content-Type', 'application/json;charset=utf-8')
+  next()
+})
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -30,8 +35,7 @@ app.get('/api/hello', (req, res) => {
   res.json({ message: '请求成功' });
 });
 
-app.post('/api/data', (req, res) => {
-  const { data } = req.body;
+const unshiftData = (data) => {
   Object.values(data).forEach(d => {
     if (d.type === 'performance') {
       if (d.subType === 'resource') {
@@ -53,7 +57,7 @@ app.post('/api/data', (req, res) => {
         whiteScreenList.unshift(d)
       } else if (d.subType === 'stutter') {
         stutterList.unshift(d)
-      } else if (d.subType ==='crash'){
+      } else if (d.subType === 'crash') {
         crashList.unshift(d)
       }
     } else if (d.type === 'behavior') {
@@ -66,8 +70,30 @@ app.post('/api/data', (req, res) => {
       }
     }
   })
+}
+
+app.post('/api/data', async (req, res) => {
+  const contentType = req.headers['content-type'];
+  let data = null
+  if (contentType.includes('application/json')) {
+    // ajax
+    data = req.body.data;
+  } else {
+    // becon
+    data = (await coBody.json(req)).data
+  }
+  unshiftData(data)
   res.json({ data });
 });
+
+// 图片上传的方式
+app.get('/api/data', async (req, res) => {
+  let data = req.query.data
+  if (!data) return
+  data = JSON.parse(JSON.parse(data)).data
+  unshiftData(data)
+  res.json({ data });
+})
 
 app.get('/api/resource', (req, res) => {
   res.json({ data: resourceList });

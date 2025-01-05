@@ -313,6 +313,11 @@
   dependencies:
     levn "^0.4.1"
 
+"@hapi/bourne@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmmirror.com/@hapi/bourne/-/bourne-3.0.0.tgz"
+  integrity sha512-Waj1cwPXJDucOib4a3bAISsKJVb15MKi9IvmTI/7ssVEm6sywXGjVJDhl6/umt1pK1ZS7PacXU3A1PmFKHEZ2w==
+
 "@humanfs/core@^0.19.1":
   version "0.19.1"
   resolved "https://registry.npmmirror.com/@humanfs/core/-/core-0.19.1.tgz"
@@ -890,6 +895,17 @@ cliui@^8.0.1:
     string-width "^4.2.0"
     strip-ansi "^6.0.1"
     wrap-ansi "^7.0.0"
+
+co-body@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.npmmirror.com/co-body/-/co-body-6.2.0.tgz"
+  integrity sha512-Kbpv2Yd1NdL1V/V4cwLVxraHDV6K8ayohr2rmH0J87Er8+zJjcTa6dAn9QMPC9CRgU8+aNajKbSf1TzDB1yKPA==
+  dependencies:
+    "@hapi/bourne" "^3.0.0"
+    inflation "^2.0.0"
+    qs "^6.5.2"
+    raw-body "^2.3.3"
+    type-is "^1.6.16"
 
 color-convert@^2.0.1:
   version "2.0.1"
@@ -1506,6 +1522,11 @@ imurmurhash@^0.1.4:
   resolved "https://registry.npmmirror.com/imurmurhash/-/imurmurhash-0.1.4.tgz"
   integrity sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==
 
+inflation@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.npmmirror.com/inflation/-/inflation-2.1.0.tgz"
+  integrity sha512-t54PPJHG1Pp7VQvxyVCJ9mBbjG3Hqryges9bXoOO6GExCPa+//i/d5GSuFtpx3ALLd7lgIAur6zrIlBQyJuMlQ==
+
 inherits@2.0.4:
   version "2.0.4"
   resolved "https://registry.npmmirror.com/inherits/-/inherits-2.0.4.tgz"
@@ -1848,6 +1869,13 @@ punycode@^2.1.0:
   resolved "https://registry.npmmirror.com/punycode/-/punycode-2.3.1.tgz"
   integrity sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==
 
+qs@^6.5.2:
+  version "6.13.1"
+  resolved "https://registry.npmmirror.com/qs/-/qs-6.13.1.tgz"
+  integrity sha512-EJPeIn0CYrGu+hli1xilKAPXODtJ12T0sP63Ijx2/khC2JtuaN3JyNIpvmnkmaEtha9ocbG4A4cMcr+TvqvwQg==
+  dependencies:
+    side-channel "^1.0.6"
+
 qs@6.13.0:
   version "6.13.0"
   resolved "https://registry.npmmirror.com/qs/-/qs-6.13.0.tgz"
@@ -1865,7 +1893,7 @@ range-parser@~1.2.1:
   resolved "https://registry.npmmirror.com/range-parser/-/range-parser-1.2.1.tgz"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
-raw-body@2.5.2:
+raw-body@^2.3.3, raw-body@2.5.2:
   version "2.5.2"
   resolved "https://registry.npmmirror.com/raw-body/-/raw-body-2.5.2.tgz"
   integrity sha512-8zGqypfENjCIqGhgXToC8aB2r7YrBX+AQAfIPs/Mlk+BtPTztOvTS01NRW/3Eh60J+a48lt8qsCzirQ6loCVfA==
@@ -2590,7 +2618,7 @@ type-check@^0.4.0, type-check@~0.4.0:
   dependencies:
     prelude-ls "^1.2.1"
 
-type-is@~1.6.18:
+type-is@^1.6.16, type-is@~1.6.18:
   version "1.6.18"
   resolved "https://registry.npmmirror.com/type-is/-/type-is-1.6.18.tgz"
   integrity sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==

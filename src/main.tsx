@@ -7,11 +7,19 @@ import { notification } from 'antd';
 import Description from './components/description.tsx';
 import { config } from './config/index.ts';
 
-// @ts-ignore
-window.monitor = {}
-// @ts-ignore
-window.monitor.config = config
-monitorSDK.init(config)
+const reportAfter = (data) => {
+  notification.open({
+    message: '批量发送了数据到服务端',
+    description: <Description data={data} />,
+    duration: 2.5
+  });
+}
+const options = {
+  ...config,
+  reportAfter
+}
+
+monitorSDK.init(options)
 monitorSDK.Performance()
 monitorSDK.Error.initErrorEventListener()
 monitorSDK.Behavior()
@@ -32,38 +40,6 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-
-const webUrl = "http://localhost:5173"
-
-// 监听 fetch 请求
-const originalFetch = window.fetch;
-window.fetch = async (...args) => {
-  const response = await originalFetch(...args);
-  return response;
-};
-
-
-// 监听 XMLHttpRequest 请求
-const originalXHR = window.XMLHttpRequest;
-// @ts-ignore
-window.XMLHttpRequest = function () {
-  const xhr = new originalXHR();
-  xhr.addEventListener('load', () => {
-    const url = xhr.responseURL
-    if (url.includes(webUrl)) return    
-    const response = JSON.parse(xhr.response)
-    
-    if (url === config.url) {
-      notification.open({
-        message: '批量发送了数据到服务端',
-        description: <Description data={response.data} />,
-        duration: 2.5
-      });
-    }
-  });
-  return xhr;
-};
 
 createRoot(document.getElementById('root')!).render(
   // @ts-ignore

@@ -13,6 +13,7 @@
   "dependencies": {
     "antd": "^5.22.6",
     "axios": "^1.7.9",
+    "co-body": "^6.2.0",
     "concurrently": "^9.1.1",
     "cors": "^2.8.5",
     "express": "^4.21.2",
