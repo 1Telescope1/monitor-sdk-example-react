@@ -30,7 +30,7 @@ function Exception() {
 
   const triggerStutter = () => {
     for (let i = 0; i < 5; i++) {
-      const end = Date.now() + 200; // 阻塞 300 毫秒
+      const end = Date.now() + 300; // 阻塞 300 毫秒
       while (Date.now() < end) {
       }
     }

@@ -22,6 +22,10 @@ const whiteScreenList = []
 const stutterList = []
 const crashList = []
 
+const pvList = []
+const clickList = []
+const trackerList = []
+
 app.get('/api/hello', (req, res) => {
   res.json({ message: '请求成功' });
 });
@@ -51,6 +55,14 @@ app.post('/api/data', (req, res) => {
         stutterList.unshift(d)
       } else if (d.subType ==='crash'){
         crashList.unshift(d)
+      }
+    } else if (d.type === 'behavior') {
+      if (d.subType === 'pv') {
+        pvList.unshift(d)
+      } else if (d.subType === 'click') {
+        clickList.unshift(d)
+      } else if (d.subType === 'tracker') {
+        trackerList.unshift(d)
       }
     }
   })
@@ -92,6 +104,18 @@ app.get('/api/stutter', (req, res) => {
 app.get('/api/crash', (req, res) => {
   res.json({ data: crashList });
 })
+
+app.get('/api/pv', (req, res) => {
+  res.json({ data: pvList });
+});
+
+app.get('/api/click', (req, res) => {
+  res.json({ data: clickList });
+});
+
+app.get('/api/tracker', (req, res) => {
+  res.json({ data: trackerList });
+});
 
 app.get('/api/get', (req, res) => {
   res.json({ data: 'get成功' });

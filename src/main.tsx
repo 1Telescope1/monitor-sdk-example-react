@@ -12,8 +12,7 @@ window.monitor = {}
 // @ts-ignore
 window.monitor.config = config
 monitorSDK.init(config)
-// monitorSDK.Behavior()
-// monitorSDK.Performance()
+monitorSDK.Performance()
 monitorSDK.Error.initErrorEventListener()
 monitorSDK.Behavior()
 monitorSDK.Exception()
@@ -58,7 +57,8 @@ window.XMLHttpRequest = function () {
     if (url === config.url) {
       notification.open({
         message: '批量发送了数据到服务端',
-        description: <Description data={response.data} />
+        description: <Description data={response.data} />,
+        duration: 2.5
       });
     }
   });
