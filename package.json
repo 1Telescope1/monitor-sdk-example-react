@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@web-tracke/monitor": "^1.0.1",
     "antd": "^5.22.6",
     "axios": "^1.7.9",
     "co-body": "^6.2.0",
