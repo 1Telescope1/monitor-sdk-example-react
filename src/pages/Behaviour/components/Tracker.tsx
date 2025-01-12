@@ -1,7 +1,7 @@
 import { Alert, Button, Col, Form, Input, Row, Select, Table } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import monitorSDK from 'monitor-sdk';
+import monitorSDK from '@web-tracke/monitor';
 
 const trackerFn = monitorSDK.getBehaviour().customHandler
 const { Option } = Select;

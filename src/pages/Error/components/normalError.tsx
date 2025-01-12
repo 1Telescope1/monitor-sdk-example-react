@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import ErrorHighlighter from '../../../components/ErrorHighlighter';
 import ReplayComponent from '../../../components/ReplayComponent';
-import monitorSDK from 'monitor-sdk'
+import monitorSDK from '@web-tracke/monitor'
 
 function NormalError() {
   const message = "js错误通过监听error事件拦截，promise错误通过监听unhandledrejection事件拦截"

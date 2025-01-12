@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import monitorSDK from 'monitor-sdk'
+import monitorSDK from '@web-tracke/monitor'
 import axios from 'axios';
 import { notification } from 'antd';
 import Description from './components/description.tsx';

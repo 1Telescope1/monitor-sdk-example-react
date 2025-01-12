@@ -30,10 +30,36 @@ function Pv() {
       width: '80px',
     },
     {
+      title: '页面标题',
+      dataIndex: 'title',
+      width: '80px',
+      render: (text, record) => {        
+        return record.pageInfo.title
+      }
+    },
+    {
+      title: '页面路径',
+      dataIndex: 'href',
+      width: '80px',
+      render: (text, record) => {        
+        return record.pageInfo.href
+      }
+    },
+    {
       title: '网页尺寸',
-      key: 'eventKey',
-      dataIndex: 'eventKey',
-      width: '80px'
+      key: 'pageInfo',
+      width: '80px',
+      render: (text, record) => {        
+        return text.pageInfo.winScreen
+      }
+    },
+    {
+      title: '页面来源',
+      key: 'pageLoadType',
+      width: '80px',
+      render: (text, record) => {        
+        return text.pageInfo.pageLoadType
+      }
     },
     {
       title: '上报时间',

@@ -1,7 +1,7 @@
 import { Alert, Button, Space, Table } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import monitorSDK from 'monitor-sdk'
+import monitorSDK from '@web-tracke/monitor'
 import ReplayComponent from '../../components/ReplayComponent';
 
 
